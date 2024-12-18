@@ -18,6 +18,7 @@ apt-get install -y docker-ce docker-ce-cli containerd.io
 systemctl start docker
 systemctl enable docker
 # Step 7: Add current user to Docker group
-usermod -aG docker $USERecho "Docker installation complete."
+usermod -aG docker $USER
+echo "Docker installation complete."
 
 sudo docker run --rm -it --shm-size=512m -p 6901:6901 -e VNC_PW=password kasmwe$
