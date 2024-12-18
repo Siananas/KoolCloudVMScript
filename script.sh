@@ -2,7 +2,8 @@
 
 # Mise à jour du système
 echo "Mise à jour du système..."
-sudo apt update && sudo apt upgrade -y
+sudo apt update 
+# && sudo apt upgrade -y
 
 # Installation des dépendances pour Docker
 echo "Installation des dépendances..."
