@@ -1,2 +1,2 @@
 #!/bin/bash
- echo "test"
+touch fichier.txt
