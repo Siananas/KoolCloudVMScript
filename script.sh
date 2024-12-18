@@ -36,7 +36,7 @@ sudo systemctl enable docker
 
 # Téléchargement et exécution d'un conteneur de test (par exemple, nginx)
 echo "Téléchargement et exécution d'un conteneur Docker..."
-sudo docker run --rm -it -p 80:80 yeasy/simple-web:latest
+sudo docker run -d --rm -it -p 80:80 yeasy/simple-web:latest
 
 # Message de fin
 echo "Installation et exécution terminées !"
