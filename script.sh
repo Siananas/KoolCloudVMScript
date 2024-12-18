@@ -6,6 +6,7 @@ sudo apt update && sudo apt upgrade -y
 
 # Installation des dépendances pour Docker
 echo "Installation des dépendances..."
+sudo dpkg --configure -a
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
 # Ajout de la clé GPG officielle de Docker
