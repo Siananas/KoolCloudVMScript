@@ -36,7 +36,7 @@ sudo systemctl enable docker
 
 # Téléchargement et exécution d'un conteneur de test (par exemple, nginx)
 echo "Téléchargement et exécution d'un conteneur Docker..."
-sudo docker run --rm -it --shm-size=512m -p 6901:6901 -e VNC_PW=password kasmweb/doom:1.16.0
+sudo docker run --rm -it -p 80:80 yeasy/simple-web:latest
 
 # Message de fin
 echo "Installation et exécution terminées !"
