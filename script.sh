@@ -1,15 +1,5 @@
 #!/bin/bash
 
-# Vérification des droits root
-if [ "$EUID" -ne 0 ]; then
-  echo "Ce script doit être exécuté avec des privilèges root (sudo)." 
-  exit 1
-fi
-
-# Résolution de dpkg interrompu
-echo "Vérification des interruptions de dpkg..."
-sudo dpkg --configure -a
-
 # Mise à jour du système
 echo "Mise à jour du système..."
 sudo apt update && sudo apt upgrade -y
@@ -34,36 +24,18 @@ sudo apt update
 echo "Installation de Docker..."
 sudo apt install -y docker-ce docker-ce-cli containerd.io
 
-# Vérification de l'installation
-if ! command -v docker &> /dev/null; then
-  echo "Docker n'a pas été correctement installé. Vérifiez les journaux et réessayez."
-  exit 1
-fi
-
-# Création du groupe Docker s'il n'existe pas
-if ! getent group docker > /dev/null; then
-  echo "Création du groupe Docker..."
-  sudo groupadd docker
-fi
-
-# Ajout de l'utilisateur actuel au groupe Docker
+# Ajout de l'utilisateur actuel au groupe Docker (optionnel, pour éviter sudo)
 echo "Ajout de l'utilisateur actuel au groupe Docker..."
 sudo usermod -aG docker $USER
 
-# Démarrage et activation de Docker
-echo "Démarrage et activation de Docker..."
+# Démarrage du service Docker
+echo "Démarrage du service Docker..."
 sudo systemctl start docker
 sudo systemctl enable docker
 
-# Vérification du démarrage de Docker
-if ! systemctl is-active --quiet docker; then
-  echo "Docker n'a pas pu démarrer correctement. Vérifiez les journaux et réessayez."
-  exit 1
-fi
-
-# Téléchargement et exécution d'un conteneur de test (Doom)
+# Téléchargement et exécution d'un conteneur de test (par exemple, nginx)
 echo "Téléchargement et exécution d'un conteneur Docker..."
-sudo docker run --rm -it --shm-size=512m -p 6901:6901 -e VNC_PW=password kasmweb/doom:1.16.0
+sudo docker run -d -p 80:80 --name nginx-container nginx
 
 # Message de fin
-echo "Installation et exécution terminées ! Vous pouvez accéder à votre conteneur Doom sur http://localhost"
+echo "Installation et exécution terminées ! Vous pouvez accéder à votre conteneur Nginx sur http://localhost"
