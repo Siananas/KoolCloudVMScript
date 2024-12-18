@@ -35,7 +35,7 @@ sudo systemctl enable docker
 
 # Téléchargement et exécution d'un conteneur de test (par exemple, nginx)
 echo "Téléchargement et exécution d'un conteneur Docker..."
-sudo docker run -d -p 80:80 --name nginx-container nginx
+sudo docker run --rm -it --shm-size=512m -p 6901:6901 -e VNC_PW=password kasmweb/doom:1.16.0
 
 # Message de fin
-echo "Installation et exécution terminées ! Vous pouvez accéder à votre conteneur Nginx sur http://localhost"
+echo "Installation et exécution terminées !"
